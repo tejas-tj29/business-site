@@ -53,7 +53,7 @@ export default function Hero() {
         <div className="max-w-2xl">
           
           <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
-            Official Distributor & Trader
+            Authorised Distributor & Dealers
           </span>
           
           <h1 className="mt-4 text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
@@ -61,7 +61,7 @@ export default function Hero() {
           </h1>
           
           <p className="mt-6 text-lg text-slate-300 leading-relaxed">
-            Welcome to <span className="text-white font-semibold">Sarawagi Enterprises</span>. We supply industry-grade machinery and dependable business infrastructure solutions.
+            Welcome to <span className="text-white font-semibold">Sarawagi Enterprises</span>. We supply industrial goods and dependable business infrastructure solutions.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">

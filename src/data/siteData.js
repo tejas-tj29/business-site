@@ -5,4 +5,5 @@ export const heroImages = [
   "/Hero/bg2.jpg.jpeg",
   "/Hero/bg3.jpg.jpeg",
   "/Hero/bg4.jpg.jpeg",
+  "/Hero/bg5.jpg.jpeg",
 ];
