@@ -18,7 +18,7 @@ export default function Hero() {
         {heroImages.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-all duration-[5000ms] ease-in-out ${
+            className={`absolute inset-0 transition-all duration-5000 ease-in-out ${
               index === currentIndex 
                 ? 'opacity-60 scale-105 pointer-events-auto' 
                 : 'opacity-0 scale-100 pointer-events-none'  
@@ -30,7 +30,7 @@ export default function Hero() {
             }}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/50 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-slate-950/80 via-slate-950/50 to-transparent" />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="max-w-2xl">

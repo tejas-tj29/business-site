@@ -1,7 +1,7 @@
 import React from 'react';
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full shadow-sm">
+    <header className="sticky top-0 z-50 w-full shadow-xs">
       <div className="bg-slate-900 text-slate-300 text-xs py-2 border-b border-slate-800 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex space-x-6">
@@ -24,7 +24,7 @@ export default function Navbar() {
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center gap-3">
             <img src="\Hero\logo.png" alt="SE" 
-              className="h-12 w-12 object-cover rounded-full border border-slate-100 shadow-sm"/>
+              className="h-12 w-12 object-cover rounded-full border border-slate-100 shadow-xs"/>
               <span className="text-base sm:text-lg font-bold text-blue-600 tracking-tight uppercase">
                 Sarawagi Enterprises </span>
             </div>
