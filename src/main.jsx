@@ -5,6 +5,7 @@ import './index.css'
 
 import Layout from './Layout.jsx'
 import Home from './pages/Home.jsx'
+import Contact from './pages/Contact.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -12,6 +13,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
         </Route>
       </Routes>
     </BrowserRouter>
