@@ -1,0 +1,1 @@
+export const DB_NAME = "sarawagi_b2b";
