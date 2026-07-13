@@ -1,8 +1,13 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {clientLogos} from "../data/siteData.js";
 
 export default function Clients() {
   // 🟢 Completely empty data array structure ready for your data entries
+
+  useEffect(() => {
+    document.title = "Clients | Sarawagi Enterprises";
+  }, []);
+
   const clientsData = [
     { id: 1, name: "Tata Steel", img: clientLogos[3] },
     { id: 2, name: "Tata Power", img: clientLogos[0] },

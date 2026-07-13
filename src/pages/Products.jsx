@@ -1,8 +1,13 @@
 // src/pages/Products.jsx
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { principleCompanies, productsData } from "../data/productsData.js";
 
 export default function Products() {
+
+   useEffect(() => {
+    document.title = "Products | Sarawagi Enterprises";
+  }, []);
+
   const [activeCompany, setActiveCompany] = useState("MYK Laticrete");
 
   const currentCompanyData = productsData[activeCompany] || {};

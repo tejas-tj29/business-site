@@ -1,6 +1,12 @@
 import ContactForm from '../components/ContactForm.jsx';
+import { useEffect } from 'react';
 
 export default function Contact() {
+
+   useEffect(() => {
+    document.title = "Contact | Sarawagi Enterprises";
+   }, []);
+
   return (
     <div className="w-full bg-slate-950 py-16 px-4 min-h-[calc(100vh-4rem)]">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
