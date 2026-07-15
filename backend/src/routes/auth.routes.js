@@ -14,6 +14,7 @@ router.route("/login").post(
 );
 
 router.route("/logout").post(
+    verifyJWT,
     logoutAdmin
 );
 

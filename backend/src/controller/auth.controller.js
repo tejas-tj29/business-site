@@ -41,12 +41,21 @@ export const registerAdmin = asyncHandler(async (req, res) => {
       email,
       password,
     });
-    res
-      .status(201)
-      .json({ success: true, message: "Admin Registered Successfully!" });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
+
+   const createdAdmin = await Admin.findById(admin._id).select(
+        "-password -refreshToken"
+        );
+
+        if(!createdAdmin){
+            throw new ApiError(500, "Failed to create admin");
+        }
+
+        return res.status(201).json(
+            new ApiResponseHandler(200, createdAdmin, "Admin registered successfully"),
+        );
+   } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
 });
 
 export const loginAdmin = async (req, res) => {
@@ -81,10 +90,15 @@ export const loginAdmin = async (req, res) => {
     const options = { httpOnly: true, secure: true };
 
     return res
-      .status(200)
-      .cookie("accessToken", accessToken, options)
-      .cookie("refreshToken", refreshToken, options)
-      .json({ success: true, message: "Admin logged in successfully!" });
+    .status(200)
+    .cookie("refreshToken", refreshToken,options)
+    .cookie("accessToken", accessToken,options)
+    .json(
+        new ApiResponseHandler(200, {
+            user: loggedInAdmin, refreshToken, accessToken
+        }
+        ,"Admin logged in successfully")
+    );
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -181,6 +195,6 @@ export const changeCurrentPassword = asyncHandler(async (req,res) => {
     return res
     .status(200)
     .json(
-        new ApiResponseHandler({},200,"Password changes successfully"),
+        new ApiResponseHandler({},200,"Password changed successfully"),
     );
 });
