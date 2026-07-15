@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import admin from "../models/admin.module.js";
+import Admin from "../models/admin.module.js";
 import asyncHandler from "../utils/AsyncHandler.js";
 import ApiError from "../utils/ApiErrorHandler.js";
 import ApiResponseHandler from "../utils/ApiResponseHandler.js";
@@ -89,6 +89,33 @@ export const loginAdmin = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+export const logoutAdmin = asyncHandler(async (req,res) => {
+    await Admin.findByIdAndUpdate(
+        req.admin._id,
+        {
+            $set: {
+                refreshToken: undefined,
+            }
+        },
+        {
+            new : true,
+        }
+    )
+
+    const options = {
+        httpOnly: true,
+        secure:true,
+    };
+    return res
+    .status(200)
+    .clearCookie("accessToken",options)
+    .clearCookie("refreshToken",options)
+    .json(
+        new ApiResponseHandler(200,{}, "Admin logged out successfully"),
+    )
+});
+
 
 export const refreshAccessToken = asyncHandler(async (req,res) => {
     

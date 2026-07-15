@@ -1,6 +1,6 @@
 import {Router} from 'express';
 
-import { registerAdmin, loginAdmin, changeCurrentPassword, refreshAccessToken } from "../controller/auth.controller.js";
+import { registerAdmin, loginAdmin, logoutAdmin, changeCurrentPassword, refreshAccessToken } from "../controller/auth.controller.js";
 import{verifyJWT} from "../middleware/auth.middleware.js";
 
 const router = Router();
@@ -11,6 +11,10 @@ router.route("/register").post(
 
 router.route("/login").post(
     loginAdmin,
+);
+
+router.route("/logout").post(
+    logoutAdmin
 );
 
 router.route("/refresh-token").post(
