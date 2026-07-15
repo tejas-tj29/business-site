@@ -1,8 +1,11 @@
 import React from "react";
-import { Link, Outlet, useLocation } from "react-router";
+import { Link,useNavigate, Outlet, useLocation } from "react-router";
+
+import handleLogout from "../components/AdminLogout.jsx";
 
 const AdminDashboard = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Helper function to highlight the active menu item
   const isActive = (path) => {
@@ -37,7 +40,9 @@ const AdminDashboard = () => {
         </nav>
 
         <div className="p-4 border-t border-gray-800">
-          <button className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-white font-medium transition-colors">
+          <button 
+          onClick = {() => handleLogout(navigate)}
+          className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-white font-medium transition-colors">
             Logout
           </button>
         </div>
