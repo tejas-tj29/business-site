@@ -1,15 +1,30 @@
 import Product from "../models/Product.module.js";
+import { uploadToCloudinary } from "../utils/cloudinary.js";
 
 export const createProduct = async (req, res) => {
   try {
-    const { title, image, companyCategory, specifications } = req.body;
+    const { title, image, companyCategory} = req.body;
 
-    // Creating a fresh structured object following hmara Mongoose Schema rulebook
+    let imageUrl = "";
+
+        // 2. req.file:
+        // Yeh Multer se milta hai. Agar file upload hui hai, req.file exist karega.
+        if (req.file) {
+            // 3. Call Utility:
+            // Hum RAM wala data (req.file.buffer) uploadToCloudinary ko bhej rahe hain.
+            const cloudinaryResponse = await uploadToCloudinary(req.file.buffer);
+            
+            if (cloudinaryResponse) {
+                // 4. secure_url:
+                // Cloudinary upload hone ke baad ek permanent link deta hai.
+                imageUrl = cloudinaryResponse.secure_url;
+            }
+        }
+
     const newProduct = new Product({
       title,
-      image, // In future, this string will come via Cloudinary upload pipeline
+      image:imageUrl,
       companyCategory,
-      specifications,
     });
 
     // Committing the object layer securely into MongoDB cluster storage
