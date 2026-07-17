@@ -16,6 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx'
 import AdminAddProduct from './components/AdminAddProduct.jsx'
 import AdminManageProducts from './components/AdminManageProduct.jsx'
 import AdminLogin from './components/AdminLogin.jsx'
+import GetEnquiries from './components/GetEnquiries.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -36,7 +37,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="overview" element={<div className="text-gray-500 font-medium">Dashboard Overview Stats... (Coming Soon)</div>} />
           <Route path="add-product" element={<AdminAddProduct />} />
           <Route path="manage-products" element={<AdminManageProducts />} />
-          <Route path="inquiries" element={<div className="text-gray-500 font-medium">Client Inquiries Inbox... (Coming Soon)</div>} />
+          <Route path="inquiries" element={<GetEnquiries />} />
         </Route>
         </Route>
       </Routes>

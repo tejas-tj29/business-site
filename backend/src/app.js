@@ -1,12 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 
 import authRouter from './routes/auth.routes.js';
 import inquiryRouter from './routes/inquiry.routes.js';
 import productRouter from './routes/product.routes.js';
 
 const app = express();
+app.use(helmet());
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,

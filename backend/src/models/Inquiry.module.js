@@ -16,13 +16,15 @@ const inquirySchema = new mongoose.Schema({
         required: [true, "Phone number is mandatory"],
         trim: true
     },
-    company: {
+    companyName: {
         type: String,
         default: 'Individual Buyer',
+        trim: true
     },
     message: {
         type: String,
         required: true,
+        trim: true
     },
     status:{
         type: String,

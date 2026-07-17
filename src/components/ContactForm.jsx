@@ -6,7 +6,7 @@ export default function ContactForm() {
         name: '',
         email: '',
         phone: '',
-        company: '',
+        companyName: '',
         message: ''
     });
 
@@ -42,8 +42,14 @@ export default function ContactForm() {
             const result = await response.json();
 
             if (!response.ok) {
-                throw new Error(result.message || "Failed to submit inquiry package.");
+            // Check if backend sent specific errors
+            if (result.errors) {
+                // Combine all errors into one string to show in UI
+                const errorText = Object.values(result.errors).flat().join(' | ');
+                throw new Error(errorText);
             }
+            throw new Error(result.message || "Failed to submit.");
+        }
 
             setStatusMessage({ text: "Success! Your inquiry has been transmitted directly into the cloud database.", isError: false });
 
