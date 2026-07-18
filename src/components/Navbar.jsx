@@ -98,7 +98,8 @@ export default function Navbar() {
                 onMouseEnter={() => setActiveDropdown("about")}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold">
+                <button aria-expanded={activeDropdown === "about"}
+                className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold">
                   About Us
                   <svg
                     className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "about" ? "rotate-180 text-blue-600" : ""}`}
@@ -144,7 +145,8 @@ export default function Navbar() {
                 onMouseEnter={() => setActiveDropdown("products")}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold">
+                <button aria-expanded={activeDropdown === "products"}
+                className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold">
                   Products
                   <svg
                     className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "products" ? "rotate-180 text-blue-600" : ""}`}
@@ -212,6 +214,7 @@ export default function Navbar() {
 
               {/* 📱 MOBILE HAMBURGER BUTTON */}
               <button
+                aria-expanded={isMenuOpen}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 type="button"
                 className="md:hidden text-slate-600 hover:text-slate-900 focus:outline-none p-2 rounded-lg hover:bg-slate-100/80 transition-colors"
@@ -255,6 +258,21 @@ export default function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 shadow-sm transition-all duration-200">
             <div className="px-4 pt-2 pb-4 space-y-1 font-semibold text-sm text-slate-600">
+              {/* 📱 NEW: Mobile Contact Drawer Items */}
+              <div className="mb-4 pb-4 border-b border-gray-100 space-y-2">
+                <a
+                  href="tel:+919431133184"
+                  className="flex items-center gap-2 text-blue-600"
+                >
+                  📞 Call: +91 9431133184
+                </a>
+                <a
+                  href="mailto:sarawgi@hotmail.com"
+                  className="flex items-center gap-2 text-blue-600"
+                >
+                  ✉️ Email: sarawgi@hotmail.com
+                </a>
+              </div>
               <Link
                 to="/"
                 onClick={closeAllMenus}
@@ -338,6 +356,14 @@ export default function Navbar() {
                 </button>
                 {mobileSubmenu === "about" && (
                   <div className="pl-6 bg-slate-50/50 rounded-lg mt-1 space-y-1 py-1">
+                    {/* Link 1: Profile */}
+                    <Link
+                      to="/profile"
+                      onClick={closeAllMenus}
+                      className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
+                    >
+                      Profile
+                    </Link>
                     <Link
                       to="/clients"
                       onClick={closeAllMenus}
