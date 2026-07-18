@@ -18,7 +18,7 @@ const inquirySchema = new mongoose.Schema({
     },
     companyName: {
         type: String,
-        default: 'Individual Buyer',
+        default: 'N/A',
         trim: true
     },
     message: {

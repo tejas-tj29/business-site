@@ -28,7 +28,7 @@ export default function Footer() {
                   <span className="mt-1 shrink-0">📍</span>
                   <span>
                     SARAWAGI ENTERPRISES<br />
-                    C-45,Camelia Apartment,<br />
+                    B-14,Begonia Apartment,<br />
                     Ashiana Gardens, Sonari Town, Jamshedpur, East Singhbhum,<br />
                     Jharkhand, India - 831011
                   </span>

@@ -88,7 +88,7 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium mb-1">Company Name <span className="text-xs text-slate-400">(Optional)</span></label>
+                    <label className="block text-sm font-medium mb-1">Company Name</label>
                     <input type="text" name="companyName" value={formData.companyName} onChange={handleChange}
                         className="w-full p-2.5 bg-slate-800 rounded-lg border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                 </div>

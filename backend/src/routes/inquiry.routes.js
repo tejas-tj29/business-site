@@ -13,7 +13,8 @@ const inquirySchema = z.object({
   phone: z
     .string()
     .min(10, "Phone number must be at least 10 characters long")
-    .max(15, "Phone number cannot exceed 15 characters"),
+    .max(15, "Phone number cannot exceed 15 characters")
+    .regex(/^[0-9+\-\s()]+$/, "Phone number can only contain digits, spaces, hyphens, and plus sign"),
   message: z
     .string()
     .min(5, "Message must be at least 5 characters long")
@@ -67,6 +68,8 @@ router
 
       const { name, email, phone, message, companyName } = req.body;
 
+      const cleanPhone = phone.replace(/[\s\-\(\)\+]/g, '');
+
       if (!name || !email || !phone || !message) {
         return res.status(400).json({
           success: false,
@@ -77,9 +80,9 @@ router
       const newInquiry = await Inquiry.create({
         name,
         email,
-        phone,
+        phone: cleanPhone,
         message,
-        companyName: companyName || "Individual Buyer",
+        companyName: companyName || "N/A",
       });
 
       return res.status(201).json({
@@ -98,7 +101,6 @@ router
 
 router
   .route("/:id")
-
   .delete(async (req, res) => {
     try {
       const { id } = req.params;
