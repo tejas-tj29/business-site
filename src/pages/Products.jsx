@@ -2,6 +2,15 @@ import React, { useState, useEffect } from "react";
 import { principleCompanies } from "../data/productsData";
 import { Helmet } from "react-helmet-async";
 
+const getOptimizedUrl = (url) => {
+  if (!url) return "https://placehold.co/600x400?text=No+Image";
+  // Agar URL Cloudinary ka hai, toh transformation add kar do
+  if (url.includes("cloudinary.com")) {
+    return url.replace("/upload/", "/upload/w_400,c_scale,f_auto,q_auto/");
+  }
+  return url;
+};
+
 const Products = () => {
   // 🎛️ State Pools for Products List, Loading states, and Active Filters
   const [products, setProducts] = useState([]);
@@ -11,36 +20,43 @@ const Products = () => {
 
   const companiesList = principleCompanies;
 
-  const fetchInventoryData = async (company) => {
-    setLoading(true);
-    setError(null);
-    try {
-      // 🔗 Matching the exact modular v1 query paths of our server layout
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/products/all?companyName=${encodeURIComponent(company)}`,
-      );
+  // 1. Cache state
+const [cache, setCache] = useState({});
 
-      const jsonPayload = await response.json();
-
-      if (jsonPayload.success) {
-        setProducts(jsonPayload.data); // Safely array binding into our UI hook
-      } else {
-        throw new Error(
-          jsonPayload.message || "Failed to parse content parameters.",
-        );
-      }
-    } catch (err) {
-      console.error("🔌 [FRONTEND FETCH ERROR]: Wire handshake failed:", err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
+// 2. Optimized Fetcher
+const fetchInventoryData = async (company, signal) => {
+    // Agar cache mein data hai, toh server request mat bhejo
+    if (cache[company]) {
+        setProducts(cache[company]);
+        setLoading(false);
+        return;
     }
-  };
 
-  // ⏱️ Auto-trigger network request loop whenever user changes category toggles
-  useEffect(() => {
-    fetchInventoryData(activeCategory);
-  }, [activeCategory]);
+    setLoading(true);
+    try {
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/products/all?companyName=${encodeURIComponent(company)}`,
+            { signal } // Request cancel karne ke liye
+        );
+        const jsonPayload = await response.json();
+        
+        if (jsonPayload.success) {
+            setCache(prev => ({ ...prev, [company]: jsonPayload.data })); // Cache save karo
+            setProducts(jsonPayload.data);
+        }
+    } catch (err) {
+        if (err.name !== 'AbortError') setError(err.message);
+    } finally {
+        setLoading(false);
+    }
+};
+
+// 3. Effect hook with Cleanup
+useEffect(() => {
+    const controller = new AbortController(); // Browser ka stop button
+    fetchInventoryData(activeCategory, controller.signal);
+    return () => controller.abort(); // Unmount/Change hone par request kill karo
+}, [activeCategory]);
 
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
@@ -116,11 +132,9 @@ const Products = () => {
                   {/* 🟢 THE BOX-LESS FLOATING IMAGE CONTAINER */}
                   <div className="h-56 w-full p-4 flex items-center justify-center bg-white">
                     <img
-                      src={
-                        item.image ||
-                        "https://placehold.co/600x400?text=No+Image"
-                      }
+                      src={getOptimizedUrl(item.image)}
                       alt={item.title}
+                      loading="lazy"
                       className="max-h-full max-w-full object-contain mix-blend-multiply transition-transform duration-500 hover:scale-110"
                     />
                   </div>
