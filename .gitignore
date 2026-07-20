@@ -13,6 +13,8 @@ dist
 dist-ssr
 *.local
 
+public/ProductsLogo
+
 # 🏗️ Backend additions
 backend/.env
 backend/node_modules/

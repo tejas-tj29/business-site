@@ -4,7 +4,7 @@ import { principleCompanies } from "../data/productsData";
 const AdminManageProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("MYK Laticrete");
+  const [activeCategory, setActiveCategory] = useState("");
 
   // 1. Fetch Products Logic
   const fetchProducts = async (company) => {
@@ -103,9 +103,6 @@ const AdminManageProducts = () => {
                 <th className="py-4 px-6 font-semibold text-gray-700 w-32">
                   Image
                 </th>
-                <th className="py-4 px-6 font-semibold text-gray-700 w-auto">
-                  Product Title
-                </th>
                 <th className="py-4 px-6 font-semibold text-gray-700 w-40 text-right">
                   Action
                 </th>
@@ -124,19 +121,19 @@ const AdminManageProducts = () => {
                           item.image ||
                           "https://placehold.co/100x100?text=No+Image"
                         }
-                        alt={item.title}
+                        alt={item.category || "Product Image"}
                         className="max-h-full max-w-full object-contain mix-blend-multiply"
                       />
                     </div>
                   </td>
                   <td className="py-4 px-6">
                     <span className="text-lg font-medium text-gray-800">
-                      {item.title}
+                      {item.category}
                     </span>
                   </td>
                   <td className="py-4 px-6 text-right">
                     <button
-                      onClick={() => handleDelete(item._id, item.title)}
+                      onClick={() => handleDelete(item._id, item.category)}
                       className="px-5 py-2.5 bg-white text-red-600 hover:bg-red-600 hover:text-white border border-red-200 rounded-lg font-semibold transition-all duration-200 shadow-sm hover:shadow active:scale-95"
                     >
                       Delete

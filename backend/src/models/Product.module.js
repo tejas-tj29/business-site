@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 
-const productSchema = new mongoose.Schema({
-    title: {
-      type: String,
-      required: [true, "Product name title is mandatory"],
-      trim: true,
-    },
+const productSchema = new mongoose.Schema(
+  {
     image: {
       type: String,
       default: "", // Will hold the secure Cloudinary string web link URL
@@ -14,9 +10,16 @@ const productSchema = new mongoose.Schema({
       type: String,
       required: [true, "Principal parent brand mapping name is mandatory"],
       // Strict indexing optimization for faster lookups when user toggles parent buttons
-      index: true, 
+      index: true,
     },
-},{timestamps: true});
+    category: { type: String },
+    order: {
+      type: Number,
+      default: 0,
+    },
+  },
+  { timestamps: true },
+);
 
 const Product = mongoose.model("Product", productSchema);
 

@@ -3,7 +3,8 @@ import { uploadToCloudinary } from "../utils/cloudinary.js";
 
 export const createProduct = async (req, res) => {
   try {
-    const { title, image, companyCategory} = req.body;
+
+    const { image, companyCategory, category, order } = req.body;
 
     let imageUrl = "";
 
@@ -22,9 +23,10 @@ export const createProduct = async (req, res) => {
         }
 
     const newProduct = new Product({
-      title,
       image:imageUrl,
       companyCategory,
+      category,
+      order: order ? Number(order) : 0,
     });
 
     // Committing the object layer securely into MongoDB cluster storage
@@ -54,7 +56,7 @@ export const getProductsByCompany = async (req, res) => {
     }
 
     // Dynamic database search using hmara optimized schema indexing wire
-    const productsList = await Product.find(queryFilter).sort({ createdAt: -1 });
+    const productsList = await Product.find(queryFilter).sort({ order: 1, createdAt: 1 });
 
     res.status(200).json({
       success: true,

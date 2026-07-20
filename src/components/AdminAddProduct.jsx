@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { principleCompanies } from "../data/productsData";
 
 const AdminAddProduct = () => {
   // 1. Setup State Hooks for all inputs
-  const [title, setTitle] = useState("");
-  const [companyCategory, setCompanyCategory] = useState("MYK Laticrete");
+  const [companyCategory, setCompanyCategory] = useState("Fouress Engineering");
+  const [category, setCategory] = useState("");
+  const [order, setOrder] = useState("");
   const [imageFile, setImageFile] = useState(null);
 
   // States for UX feedback
@@ -25,8 +27,9 @@ const AdminAddProduct = () => {
     try {
       // 🚀 Creating the special FormData packet (No JSON here!)
       const formData = new FormData();
-      formData.append("title", title);
       formData.append("companyCategory", companyCategory);
+      formData.append("category", category);
+      formData.append("order", order);
 
       // If a file is selected, attach it to the key "image" (this must match multer's upload.single('image'))
       if (imageFile) {
@@ -60,7 +63,6 @@ const AdminAddProduct = () => {
           "✅ Product successfully uploaded to Cloudinary & Database!",
         );
         // Reset the form fields after success
-        setTitle("");
         setImageFile(null);
       } else {
         setMessage(`❌ Upload Failed: ${jsonResponse.message}`);
@@ -80,35 +82,49 @@ const AdminAddProduct = () => {
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Title Input */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Product Title
-          </label>
-          <input
-            type="text"
-            required
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-            placeholder="e.g., Ultra Premium Grout"
-          />
-        </div>
-
         {/* Category Dropdown */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Brand / Category
+            Company Category
           </label>
           <select
             value={companyCategory}
             onChange={(e) => setCompanyCategory(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
           >
-            <option value="MYK Laticrete">MYK Laticrete</option>
-            <option value="Fouress Engineering">Fouress Engineering</option>
-            <option value="Other Partner">Other Partner</option>
+            {principleCompanies.map((company) => (
+              <option key={company} value={company}>
+                {company}
+              </option>
+            ))}
           </select>
+        </div>
+
+        {/* Display Order Input */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Display Sequence Order (e.g. 1, 2, 3...)
+          </label>
+          <input
+            type="number"
+            value={order}
+            onChange={(e) => setOrder(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter number (lower comes first)"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Category Name
+          </label>
+          <input
+            type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+            placeholder="e.g. Adhesives or Valves"
+          />
         </div>
 
         {/* Image File Uploader */}

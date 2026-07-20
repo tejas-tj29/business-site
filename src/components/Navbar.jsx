@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router";
+import { principleCompanies } from "../data/productsData";
 
 export default function Navbar() {
   // 📱 Mobile menu side drawer control state
@@ -138,10 +139,9 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-
               {/* Products Hover Wrapper Container */}
               <div
-                className="relative py-4" /* Added padding here so there's no blank gap below the button */
+                className="relative py-4"
                 onMouseEnter={() => setActiveDropdown("products")}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
@@ -163,31 +163,26 @@ export default function Navbar() {
                   </svg>
                 </button>
 
-                {/* Submenu Panel */}
                 {activeDropdown === "products" && (
-                  <div className="absolute left-0 mt-1 w-52 rounded-xl bg-white shadow-xl ring-1 ring-black/5 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <div className="absolute left-0 mt-1 w-48 rounded-xl bg-white shadow-xl ring-1 ring-black/5 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                     <Link
-                      to="/products"
-                      onClick={closeAllMenus}
-                      className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
-                    >
-                      All Products Overview
-                    </Link>
-                    <div className="h-px bg-gray-100 my-1 mx-2"></div>
-                    <Link
-                      to="/products#industrial"
-                      onClick={closeAllMenus}
-                      className="block px-4 py-2 text-xs text-gray-500 hover:bg-slate-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
-                    >
-                      Industrial Equipment
-                    </Link>
-                    <Link
-                      to="/products#raw-materials"
-                      onClick={closeAllMenus}
-                      className="block px-4 py-2 text-xs text-gray-500 hover:bg-slate-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
-                    >
-                      Raw Materials
-                    </Link>
+        to="/products"
+        onClick={closeAllMenus}
+        className="block px-4 py-2.5 text-xs font-bold text-blue-600 hover:bg-blue-50 rounded-lg mx-1 transition-colors border-b border-gray-100"
+      >
+        📂 All Products Overview
+      </Link>
+                    
+                    {principleCompanies.map((company) => (
+                      <Link
+                        key={company}
+                        to={`/products?brand=${encodeURIComponent(company)}`}
+                        onClick={closeAllMenus}
+                        className="block px-4 py-2.5 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg mx-1 transition-colors"
+                      >
+                        {company}
+                      </Link>
+                    ))}
                   </div>
                 )}
               </div>
