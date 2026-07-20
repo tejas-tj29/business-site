@@ -3,6 +3,14 @@ import { Link } from "react-router";
 import { principleCompanies } from "../data/productsData";
 
 export default function Navbar() {
+
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Yeh animation ke sath upar le jayega
+    });
+  };
+
   // 📱 Mobile menu side drawer control state
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -87,7 +95,10 @@ export default function Navbar() {
               {/* Home */}
               <Link
                 to="/"
-                onClick={closeAllMenus}
+                onClick={() => {
+                  closeAllMenus();
+                  handleScrollToTop();
+                }}
                 className="hover:text-blue-600 transition-colors duration-150"
               >
                 Home
