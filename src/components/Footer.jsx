@@ -151,11 +151,6 @@ export default function Footer() {
           <p className="text-center sm:text-left text-slate-400">
             © {currentYear} SARAWAGI ENTERPRISES. All industrial rights reserved.
           </p>
-          <div className="flex items-center gap-5 text-slate-500 text-xs">
-            <Link to="/admin" className="hover:text-blue-400 transition-colors uppercase font-bold tracking-wider text-[11px]">
-              Admin Panel Console
-            </Link>
-          </div>
         </div>
       </div>
 

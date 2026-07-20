@@ -84,7 +84,7 @@ const Products = () => {
 
       {/* Left Sidebar Brand Navigation */}
       <div className="w-full md:w-1/4 flex flex-col gap-2">
-        <h3 className="text-xl font-bold mb-4 text-gray-800">Our Principals</h3>
+        <h3 className="text-xl font-bold mb-4 text-gray-800">Our Principles</h3>
         {companiesList.map((company) => (
           <button
             key={company}
