@@ -18,6 +18,7 @@ public/ProductsLogo
 # 🏗️ Backend additions
 backend/.env
 backend/node_modules/
+backend/src/models/Product.module.js
 
 # Editor directories and files
 .vscode/*
