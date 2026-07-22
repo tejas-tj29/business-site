@@ -64,7 +64,7 @@ export default function Footer() {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://maps.app.goo.gl/5f7PWSuD61vtCK718"
+                    href="https://maps.app.goo.gl/JbzoWRbTjnsb5C2D6"
                     className="text-[#f7fafc] hover:underline font-semibold text-xs uppercase tracking-wide"
                   >
                     Map Direction
