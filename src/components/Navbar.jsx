@@ -3,7 +3,6 @@ import { Link } from "react-router";
 import { principleCompanies } from "../data/productsData";
 
 export default function Navbar() {
-
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -46,13 +45,13 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex space-x-6">
             <a
-              href="tel:+919431133184"
+              href="tel:+917209385285"
               className="flex items-center gap-1 hover:text-blue-400 transition-colors duration-150 group"
             >
               <span className="text-blue-400 font-medium group-hover:underline">
                 📞 Call Us:
               </span>
-              +91 9431133184
+              +91 7209385285
             </a>
             <a
               href="mailto:sarawgi@hotmail.com?subject=Industrial%20Equipment%20Inquiry"
@@ -110,8 +109,10 @@ export default function Navbar() {
                 onMouseEnter={() => setActiveDropdown("about")}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button aria-expanded={activeDropdown === "about"}
-                className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold">
+                <button
+                  aria-expanded={activeDropdown === "about"}
+                  className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold"
+                >
                   About Us
                   <svg
                     className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "about" ? "rotate-180 text-blue-600" : ""}`}
@@ -156,8 +157,10 @@ export default function Navbar() {
                 onMouseEnter={() => setActiveDropdown("products")}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <button aria-expanded={activeDropdown === "products"}
-                className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold">
+                <button
+                  aria-expanded={activeDropdown === "products"}
+                  className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-150 focus:outline-none cursor-pointer font-semibold"
+                >
                   Products
                   <svg
                     className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "products" ? "rotate-180 text-blue-600" : ""}`}
@@ -177,13 +180,13 @@ export default function Navbar() {
                 {activeDropdown === "products" && (
                   <div className="absolute left-0 mt-1 w-48 rounded-xl bg-white shadow-xl ring-1 ring-black/5 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                     <Link
-        to="/products"
-        onClick={closeAllMenus}
-        className="block px-4 py-2.5 text-xs font-bold text-blue-600 hover:bg-blue-50 rounded-lg mx-1 transition-colors border-b border-gray-100"
-      >
-        📂 All Products Overview
-      </Link>
-                    
+                      to="/products"
+                      onClick={closeAllMenus}
+                      className="block px-4 py-2.5 text-xs font-bold text-blue-600 hover:bg-blue-50 rounded-lg mx-1 transition-colors border-b border-gray-100"
+                    >
+                      📂 All Products Overview
+                    </Link>
+
                     {principleCompanies.map((company) => (
                       <Link
                         key={company}

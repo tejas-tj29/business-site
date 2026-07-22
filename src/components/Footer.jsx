@@ -56,7 +56,7 @@ export default function Footer() {
                     href="tel:+919431133184"
                     className="text-[#f7fafc] hover:underline"
                   >
-                    +91 9431133184
+                    +91 7209385285
                   </a>
                 </p>
                 <p className="flex items-center gap-2">

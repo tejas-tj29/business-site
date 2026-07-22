@@ -75,7 +75,7 @@ const Products = () => {
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
       <Helmet>
-        <title>Industrial Chemicals & Polymers | Sarawagi Enterprises</title>
+        <title>Industrial Products | Sarawagi Enterprises</title>
         <meta
           name="description"
           content="Browse our wide range of premium industrial chemicals, masterbatches, and polymers. We are authorized wholesale suppliers."
