@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 
-const ChairmanMessage = () => {
+const FounderMessage = () => {
   return (
     <section className="py-16 bg-gray-50 border-y border-gray-100">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -30,9 +30,9 @@ const ChairmanMessage = () => {
               </p>
             </div>
 
-            {/* Chairman Signature / Name Tag */}
+            {/* Founder Signature / Name Tag */}
             <div className="mt-8">
-              <h4 className="font-bold text-gray-900 text-lg">Chairman</h4>
+              <h4 className="font-bold text-gray-900 text-lg">Founder</h4>
               <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">
                 Sarawagi Enterprises
               </p>
@@ -47,12 +47,12 @@ const ChairmanMessage = () => {
             </div>
             </div>
 
-          {/* 🖼️ Right Side: Chairman's Photograph */}
+          {/* 🖼️ Right Side: Founder's Photograph */}
           <div className="w-full lg:w-2/5 flex justify-center">
             <div className="relative w-72 h-80 sm:w-80 sm:h-96 rounded-2xl overflow-hidden shadow-lg border-4 border-white bg-white">
               <img
                 src="/Founder/founder.png" 
-                alt="Chairman of Sarawagi Enterprises"
+                alt="Founder of Sarawagi Enterprises"
                 className="w-full h-full object-cover object-top transition-transform duration-500"
                 loading="lazy"
               />
@@ -64,4 +64,4 @@ const ChairmanMessage = () => {
   );
 };
 
-export default ChairmanMessage;
+export default FounderMessage;
