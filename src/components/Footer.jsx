@@ -143,7 +143,7 @@ export default function Footer() {
                     to="/products"
                     className="hover:text-white hover:underline transition-colors block"
                   >
-                    High-Pressure Flow Systems
+                    Industrial Water Treatment Accessories
                   </Link>
                 </li>
                 <li>
@@ -151,7 +151,7 @@ export default function Footer() {
                     to="/products"
                     className="hover:text-white hover:underline transition-colors block"
                   >
-                    Safety Valve Manifolds
+                    Waterproofing Solutions
                   </Link>
                 </li>
                 <li>
@@ -167,7 +167,7 @@ export default function Footer() {
                     to="/products"
                     className="hover:text-white hover:underline transition-colors block"
                   >
-                    Pipeline Isolation Systems
+                    Tile & Stone Adhesives
                   </Link>
                 </li>
               </ul>
