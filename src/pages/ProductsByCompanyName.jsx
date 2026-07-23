@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router";
-import { principleCompanies } from "../data/productsData";
+import { principleCompanies, companySEOData } from "../data/productsData";
 import { Helmet } from "react-helmet-async";
+
 
 const getOptimizedUrl = (url) => {
   if (!url) return "https://placehold.co/600x400?text=No+Image";
@@ -14,10 +15,8 @@ const getOptimizedUrl = (url) => {
 const ProductsByCompanyName = () => {
   const { companyName } = useParams();
   const decodedBrand = companyName 
-  ? decodeURIComponent(companyName)
-      .replace(/-/g, ' ')
-      .replace(/\b\w/g, (char) => char.toUpperCase()) // Har word ka pehla letter bada kar dega
-  : "Fouress Engineering";
+    ? decodeURIComponent(companyName).replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+    : "Fouress Engineering";
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -26,6 +25,12 @@ const ProductsByCompanyName = () => {
   const [cache, setCache] = useState({});
 
   const companiesList = principleCompanies;
+
+  const defaultSEO = {
+    title: `${activeCategory} Products & Industrial Supplies | Sarawagi Enterprises`,
+    description: `Explore authorized ${activeCategory} industrial products and engineering solutions supplied by Sarawagi Enterprises in Jamshedpur, Jharkhand.`
+  };
+  const currentSEO = companySEOData[activeCategory] || defaultSEO;
 
   const groupedProducts = products.reduce((acc, product) => {
     const cat = product?.category || "General Products";
@@ -80,11 +85,8 @@ const ProductsByCompanyName = () => {
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
       <Helmet>
-        <title>Industrial Products | Sarawagi Enterprises</title>
-        <meta
-          name="description"
-          content="Browse our wide range of premium industrial chemicals, masterbatches, and polymers. We are authorized wholesale suppliers."
-        />
+        <title>{currentSEO.title}</title>
+        <meta name="description" content={currentSEO.description} />
       </Helmet>
 
       {/* Left Sidebar Brand Navigation */}
