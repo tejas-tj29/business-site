@@ -4,19 +4,22 @@ import { principleCompanies } from "../data/productsData";
 const AdminManageProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("");
+  const [activeCategory, setActiveCategory] = useState(principleCompanies[0]);
 
   // 1. Fetch Products Logic
   const fetchProducts = async (company) => {
+    if(!company) return;
     setLoading(true);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/products/all?companyName=${encodeURIComponent(company)}`,
+        `${import.meta.env.VITE_API_URL}/products/${encodeURIComponent(company)}`,
       );
       const json = await response.json();
       if (json.success) {
         setProducts(json.data);
       }
+      else
+        setProducts([]);
     } catch (err) {
       console.error("Fetch error:", err);
     } finally {
@@ -102,6 +105,9 @@ const AdminManageProducts = () => {
                 {/* Fixed widths to balance the layout perfectly */}
                 <th className="py-4 px-6 font-semibold text-gray-700 w-32">
                   Image
+                </th>
+                <th className="py-4 px-6 font-semibold text-gray-700">
+                  Sub-Category
                 </th>
                 <th className="py-4 px-6 font-semibold text-gray-700 w-40 text-right">
                   Action
