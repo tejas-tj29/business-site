@@ -87,7 +87,7 @@ export const loginAdmin = async (req, res) => {
       "-password -refreshToken",
     );
 
-    const options = { httpOnly: true , secure: true };
+    const options = { httpOnly: true , secure: false };
 
     return res
     .status(200)
