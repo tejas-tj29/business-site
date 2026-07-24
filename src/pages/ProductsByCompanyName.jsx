@@ -25,6 +25,8 @@ const ProductsByCompanyName = () => {
   const [activeCategory, setActiveCategory] = useState(decodedBrand);
   const [cache, setCache] = useState({});
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const companiesList = principleCompanies;
 
   const defaultSEO = {
@@ -89,9 +91,85 @@ const ProductsByCompanyName = () => {
         <title>{currentSEO.title}</title>
         <meta name="description" content={currentSEO.description} />
       </Helmet>
+      
+      {/* 🟢 CHANGE 2: Created a mobile-specific collapsible brand selector bar (visible only on mobile: block md:hidden) */}
+      <div className="block md:hidden w-full bg-white border border-gray-200 rounded-xl p-4 shadow-sm mb-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider block">
+              Current Principle
+            </span>
+            <span className="text-lg font-bold text-blue-600 truncate">
+              {activeCategory}
+            </span>
+          </div>
+          
+          {/* 🟢 CHANGE 3: Added a toggle button to open/close the mobile brand dropdown */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2.5 rounded-lg font-medium text-sm shadow-sm active:scale-95 transition-transform"
+            aria-label="Toggle Brands Menu"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isMobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+            <span>{isMobileMenuOpen ? "Close Brands" : "Select Brand"}</span>
+          </button>
+        </div>{/* 🟢 CHANGE 4: Collapsible list mapping all 8 principal brands for mobile users */}
+        {isMobileMenuOpen && (
+          <div className="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-2">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
+              All 8 Principal Brands
+            </p>
+            {companiesList.map((company) => {
+              const slug = company.replace(/\s+/g, "-");
+              const isActive =
+                activeCategory.toLowerCase() === company.toLowerCase();
 
+              return (
+                <Link
+                  key={company}
+                  to={`/products/${slug}`}
+                  onClick={() => {
+                    setActiveCategory(company);
+                    // 🟢 CHANGE 5: Automatically close the mobile menu drawer when a brand link is clicked
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all block ${
+                    isActive
+                      ? "bg-blue-600 text-white shadow-md"
+                      : "bg-gray-50 text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  {company}
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </div>
+         
       {/* Left Sidebar Brand Navigation */}
-      <div className="w-full md:w-1/4 flex flex-col gap-2">
+      <div className="hidden md:flex w-full md:w-1/4 flex-col gap-2">
         <h3 className="text-xl font-bold mb-4 text-gray-800">Our Principles</h3>
         {companiesList.map((company) => {
           const slug = company.replace(/\s+/g, "-");

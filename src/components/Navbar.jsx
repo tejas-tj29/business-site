@@ -324,56 +324,13 @@ export default function Navbar() {
                 )}
               </div>
 
-              <div>
-                <button
-                  onClick={() =>
-                    setMobileSubmenu(
-                      mobileSubmenu === "products" ? null : "products",
-                    )
-                  }
-                  className="w-full flex justify-between items-center py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors text-left font-semibold"
-                >
-                  <span>Products</span>
-                  <svg
-                    className={`w-4 h-4 transition-transform ${mobileSubmenu === "products" ? "rotate-180" : ""}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-                {mobileSubmenu === "products" && (
-                  <div className="pl-6 bg-slate-50/50 rounded-lg mt-1 space-y-1 py-1">
-                    <Link
-                      to="/products"
-                      onClick={closeAllMenus}
-                      className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600"
-                    >
-                      All Products
-                    </Link>
-                    <Link
-                      to="/products#industrial"
-                      onClick={closeAllMenus}
-                      className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600"
-                    >
-                      Industrial Equipment
-                    </Link>
-                    <Link
-                      to="/products#raw-materials"
-                      onClick={closeAllMenus}
-                      className="block py-2 px-3 text-xs text-gray-600 hover:text-blue-600"
-                    >
-                      Raw Materials
-                    </Link>
-                  </div>
-                )}
-              </div>
+               <Link
+                to="/products"
+                onClick={closeAllMenus}
+                className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:text-blue-600 transition-colors"
+              >
+                Products
+              </Link>
 
               <Link
                 to="/contact"
